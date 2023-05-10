@@ -19,9 +19,9 @@ function UserList() {
   const { users } = useSelector((state: RootState) => state.userSlice);
   const dispatch = useDispatch();
   const activePageClass =
-    "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white";
+    "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ";
   const InactivePageClass =
-    "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white";
+    "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ";
   useEffect(() => {
     let TempData: userDataType[] = [];
     if (data != undefined) {
@@ -32,7 +32,7 @@ function UserList() {
     setUserData(TempData.length == 0 ? [] : TempData);
   }, [data]);
 
-  function setChangeHover(userData: any) {
+  function setChangeHover(userData: userDataType) {
     dispatch(profileAction.setProfile(userData));
     dispatch(hoverActions.changeHovering(true));
   }
@@ -72,7 +72,7 @@ function UserList() {
             ) : (
               <select
                 id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 defaultValue={"inactive"}
               >
                 <option value="inactive">Inactive</option>
@@ -86,7 +86,7 @@ function UserList() {
             ) : (
               <select
                 id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
                 <option defaultValue={user.access}>{user.access}</option>
               </select>
@@ -220,7 +220,7 @@ function UserList() {
                   <button
                     onClick={() => setQueryParam(queryParam + 1)}
                     disabled={queryParam == 5 ? true : false}
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 "
                   >
                     {">>"}
                   </button>
