@@ -4,10 +4,20 @@ import { userSlice } from "./userSlice";
 import { hoverSlice } from "./hoverSlice";
 import { profileSlice } from "./profileSlice";
 import { exampleApi } from "./APISlice";
+export interface hoverSliceType {
+  isHovering: boolean;
+}
+export interface userSliceType {
+  users: userDataType[];
+  pageNo: Number;
+}
+export interface profileSliceType {
+  profile: userDataType;
+}
 export interface RootState {
-  hoverSlice: { isHovering: boolean };
-  userSlice: { users: userDataType[] };
-  profileSlice: { profile: userDataType };
+  hoverSlice: hoverSliceType;
+  userSlice: userSliceType;
+  profileSlice: profileSliceType;
 }
 
 export const hoverActions = hoverSlice.actions;

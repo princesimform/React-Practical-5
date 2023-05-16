@@ -4,12 +4,17 @@ import { userDataType } from "../interface/userDataType";
 import { useGetExampleDataQuery } from "../store/APISlice";
 import Loading from "./Loading";
 import ListItem from "./ListItem";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import Pagination from "./Pagination";
 
 function UserList() {
+  const pageNo = useSelector((state: RootState) => state.userSlice.pageNo);
   const [userData, setUserData] = useState<userDataType[]>([]);
-  const [queryParam, setQueryParam] = useState(1);
-  const { data, error, isLoading, isFetching } =
-    useGetExampleDataQuery(queryParam);
+  // const [queryParam, setQueryParam] = useState(1);
+  const { data, error, isLoading, isFetching } = useGetExampleDataQuery(
+    Number(pageNo)
+  );
   const activePageClass =
     "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ";
   const InactivePageClass =
@@ -83,7 +88,7 @@ function UserList() {
             </tbody>
           </table>
           <div>
-            <nav aria-label="Page navigation example">
+            {/* <nav aria-label="Page navigation example">
               <ul className="inline-flex -space-x-px">
                 <li>
                   <button
@@ -155,7 +160,8 @@ function UserList() {
                   </button>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
+            <Pagination />
           </div>
         </div>
         <div className="w-[35vw]">{ProfileComponent}</div>

@@ -1,15 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userSliceType } from "./store";
 
-const userListInitalState = {
+const userListInitalState: userSliceType = {
   users: [],
+  pageNo: 1,
 };
 
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: userListInitalState,
   reducers: {
-    setData(state, action) {
+    setUserData(state, action) {
       state.users = action.payload;
+    },
+    setPageNo(state, action) {
+      state.pageNo = action.payload;
     },
   },
 });
