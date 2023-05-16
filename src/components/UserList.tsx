@@ -1,23 +1,15 @@
 import React, { ReactElement, useMemo, useState, useEffect } from "react";
-import { Trash2, Lock } from "react-feather";
 import Profile from "./Profile";
-import { useDispatch } from "react-redux";
-import { hoverActions, profileAction } from "../store/store";
-import { useSelector } from "react-redux";
 import { userDataType } from "../interface/userDataType";
-import { RootState } from "../store/store";
 import { useGetExampleDataQuery } from "../store/APISlice";
-import loadingGif from "./../assets/loading.gif";
-const TrashMemo = React.memo(Trash2);
-const LockMemo = React.memo(Lock);
+import Loading from "./Loading";
+import ListItem from "./ListItem";
 
 function UserList() {
   const [userData, setUserData] = useState<userDataType[]>([]);
   const [queryParam, setQueryParam] = useState(1);
   const { data, error, isLoading, isFetching } =
     useGetExampleDataQuery(queryParam);
-  const { users } = useSelector((state: RootState) => state.userSlice);
-  const dispatch = useDispatch();
   const activePageClass =
     "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ";
   const InactivePageClass =
@@ -32,71 +24,13 @@ function UserList() {
     setUserData(TempData.length == 0 ? [] : TempData);
   }, [data]);
 
-  function setChangeHover(userData: userDataType) {
-    dispatch(profileAction.setProfile(userData));
-    dispatch(hoverActions.changeHovering(true));
-  }
-  function ussetChangeHover() {
-    dispatch(hoverActions.changeHovering(false));
-  }
-
   const ProfileComponent = useMemo(() => {
     return <Profile />;
   }, []);
   function tableBody() {
     let rows: ReactElement[] = [];
     userData.map((user: userDataType) => {
-      rows.push(
-        <tr className="grid grid-cols-6" key={user.id}>
-          <td
-            className="mx-6 my-5 flex col-span-3 cursor-pointer"
-            onMouseEnter={() => setChangeHover(user)}
-            onMouseLeave={ussetChangeHover}
-          >
-            <div className="">
-              <img
-                src={user.profile}
-                alt=""
-                className="h-12 w-12  block rounded-full"
-              />
-            </div>
-            <div className="pl-4">
-              <p className="font-medium text-gray-900">{user.name}</p>
-              <p className="text-gray-500">{user.email}</p>
-            </div>
-          </td>
-          <td className="mx-6 my-5 col-span-1 ">
-            {/* <p className='text-green-600 font-bold'>Active</p> */}
-            {user.isActive == "active" ? (
-              <p className="text-green-600 font-bold">Active</p>
-            ) : (
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                defaultValue={"inactive"}
-              >
-                <option value="inactive">Inactive</option>
-                <option value="active">Active</option>
-              </select>
-            )}
-          </td>
-          <td className="mx-6 my-5 col-span-1 ">
-            {user.access == "owner" ? (
-              <p className="text-gray-800 font-bold">Owner</p>
-            ) : (
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-              >
-                <option defaultValue={user.access}>{user.access}</option>
-              </select>
-            )}
-          </td>
-          <td className="mx-6 my-5 col-span-1">
-            {user.access == "owner" ? <LockMemo /> : <TrashMemo />}
-          </td>
-        </tr>
-      );
+      rows.push(<ListItem {...user} key={user.id} />);
     });
 
     if (userData.length < 10) {
@@ -117,9 +51,8 @@ function UserList() {
     return rows;
   }
 
-  const PaginationComponent = () => {};
   if (isLoading) {
-    return <img src={loadingGif} alt="" className="w-100 h-full m-auto" />;
+    return <Loading />;
   }
 
   if (error) {
@@ -146,11 +79,7 @@ function UserList() {
               </tr>
             </thead>
             <tbody className="h-[80vh] max-[1000px]:h-[10vh] overflow-x-auto">
-              {isFetching ? (
-                <img src={loadingGif} alt="" className="m-auto" />
-              ) : (
-                tableBody()
-              )}
+              {isFetching ? <Loading /> : tableBody()}
             </tbody>
           </table>
           <div>

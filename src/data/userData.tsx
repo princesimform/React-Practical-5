@@ -25,7 +25,7 @@ const userDataList: userDataType[] = [
     profile: "https://reqres.in/img/faces/3-image.jpg",
   },
   {
-    id: 4,
+    id: 4,        
     name: "Eve Holt",
     email: "eve.holt@reqres.in",
     isActive: "inactive",

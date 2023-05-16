@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import userDataList from "../data/userData";
 
 const userListInitalState = {
-  users: userDataList,
+  users: [],
 };
 
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: userListInitalState,
-  reducers: {},
+  reducers: {
+    setData(state, action) {
+      state.users = action.payload;
+    },
+  },
 });
 
 export const userActions = userSlice.actions;
