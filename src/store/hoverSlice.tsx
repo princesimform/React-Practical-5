@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { hoverSliceType } from "./store";
 
-const HoverinitialState = {
+const HoverinitialState: hoverSliceType = {
   isHovering: false,
 };
 

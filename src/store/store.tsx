@@ -20,10 +20,6 @@ export interface RootState {
   profileSlice: profileSliceType;
 }
 
-export const hoverActions = hoverSlice.actions;
-export const userActions = userSlice.actions;
-export const profileAction = profileSlice.actions;
-
 const store = configureStore({
   reducer: {
     hoverSlice: hoverSlice.reducer,

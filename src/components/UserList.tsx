@@ -11,14 +11,9 @@ import Pagination from "./Pagination";
 function UserList() {
   const pageNo = useSelector((state: RootState) => state.userSlice.pageNo);
   const [userData, setUserData] = useState<userDataType[]>([]);
-  // const [queryParam, setQueryParam] = useState(1);
   const { data, error, isLoading, isFetching } = useGetExampleDataQuery(
     Number(pageNo)
   );
-  const activePageClass =
-    "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ";
-  const InactivePageClass =
-    "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ";
   useEffect(() => {
     let TempData: userDataType[] = [];
     if (data != undefined) {
@@ -88,79 +83,6 @@ function UserList() {
             </tbody>
           </table>
           <div>
-            {/* <nav aria-label="Page navigation example">
-              <ul className="inline-flex -space-x-px">
-                <li>
-                  <button
-                    className={`${InactivePageClass} `}
-                    onClick={() => setQueryParam(queryParam - 1)}
-                    disabled={queryParam == 1 ? true : false}
-                  >
-                    {"<<"}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(1)}
-                    className={`${
-                      queryParam == 1 ? activePageClass : InactivePageClass
-                    }`}
-                  >
-                    1
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(2)}
-                    className={`${
-                      queryParam == 2 ? activePageClass : InactivePageClass
-                    }`}
-                  >
-                    2
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(3)}
-                    aria-current="page"
-                    className={`${
-                      queryParam == 3 ? activePageClass : InactivePageClass
-                    }`}
-                  >
-                    3
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(4)}
-                    className={`${
-                      queryParam == 4 ? activePageClass : InactivePageClass
-                    }`}
-                  >
-                    4
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(5)}
-                    className={`${
-                      queryParam == 5 ? activePageClass : InactivePageClass
-                    }`}
-                  >
-                    5
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setQueryParam(queryParam + 1)}
-                    disabled={queryParam == 5 ? true : false}
-                    className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 "
-                  >
-                    {">>"}
-                  </button>
-                </li>
-              </ul>
-            </nav> */}
             <Pagination />
           </div>
         </div>
