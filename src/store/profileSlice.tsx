@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProfileData } from "../data/userData";
+import { profileSliceType } from "./store";
 
-const ProfileInitalState = {
+const ProfileInitalState: profileSliceType = {
   profile: ProfileData,
 };
 
@@ -14,3 +15,5 @@ export const profileSlice = createSlice({
     },
   },
 });
+
+export const profileAction = profileSlice.actions;

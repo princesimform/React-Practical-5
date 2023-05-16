@@ -1,7 +1,7 @@
 import React from "react";
 import { userDataType } from "../interface/userDataType";
-import { profileAction } from "../store/store";
 import { hoverActions } from "../store/hoverSlice";
+import { profileAction } from "../store/profileSlice";
 import { useDispatch } from "react-redux";
 import { Trash2, Lock } from "react-feather";
 
