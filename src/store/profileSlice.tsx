@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { ProfileData } from "../data/userData";
 import { profileSliceType } from "./store";
 
 const ProfileInitalState: profileSliceType = {
@@ -16,9 +15,12 @@ export const profileSlice = createSlice({
   initialState: ProfileInitalState,
   reducers: {
     setProfile(state, action) {
-      console.log(action.payload);
-
-      state.profile = action.payload;
+      state.access = action.payload.access;
+      state.email = action.payload.email;
+      state.id = action.payload.id;
+      state.isActive = action.payload.isActive;
+      state.name = action.payload.name;
+      state.profile = action.payload.profile;
     },
   },
 });

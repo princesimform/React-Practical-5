@@ -1,6 +1,5 @@
 import React from "react";
 import loadingGif from "./../assets/loading.gif";
-import { useMemo } from "react";
 function Loading() {
   return (
     <div className="m-auto">

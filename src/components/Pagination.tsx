@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../store/userSlice";
@@ -6,8 +5,6 @@ import { RootState } from "../store/store";
 
 function Pagination() {
   const pageNo = useSelector((state: RootState) => state.userSlice.pageNo);
-  console.log(pageNo);
-
   const dispatch = useDispatch();
   const activePageClass =
     "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ";
